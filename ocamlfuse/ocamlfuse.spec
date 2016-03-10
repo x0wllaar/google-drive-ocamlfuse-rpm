@@ -1,6 +1,7 @@
 #
 # spec file for package ocamlfuse
 #
+# Copyright (c) 2016 Sérgio Basto.
 # Copyright (c) 2015 SUSE LINUX GmbH, Nuernberg, Germany.
 # Copyright (c) 2015 LISA GmbH, Bingen, Germany.
 #
@@ -66,5 +67,8 @@ make OCAMLLIB=%{buildroot}/%{_libdir}/ocaml\
 %{_libdir}/ocaml/stublibs/*
 
 %changelog
+* Thu Mar 10 2016 Sérgio Basto <sergio@serjux.com> - 2.7.1-1.cv2
+- Migrate to Fedora/Redhat.
+
 * Sat Nov  7 2015 hpj@urpla.net
 - version 2.7.1-cvs2: initial build

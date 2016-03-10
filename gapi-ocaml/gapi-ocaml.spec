@@ -1,6 +1,7 @@
 #
-# spec file for package ocaml-gapi
+# spec file for package gapi-ocaml
 #
+# Copyright (c) 2016 Sérgio Basto.
 # Copyright (c) 2015 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # Copyright (c) 2015 LISA GmbH, Bingen, Germany.
 #
@@ -36,15 +37,15 @@ BuildRequires:  ocaml-extlib-devel >= 1.5.1
 BuildRequires:  ocaml-yojson >= 1.0.2
 BuildRequires:  ocaml-xmlm-devel >= 1.0.2
 BuildRequires:  ocaml-ounit-devel >= 1.1.0
-BuildRequires:  ocaml-curl
+BuildRequires:  ocaml-curl-devel
+BuildRequires:  zlib-devel
 
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-# ocaml autodep start for pkg: ocaml-gapi
+# ocaml autodep start for pkg: gapi-ocaml
 # hardcoded rpm dependency for pre 12.1 to compensate for lack of ocaml() provides/requires
 %if 0%{?suse_version} < 1210
 Requires:       ocaml-biniou ocaml-cryptokit ocaml-easy-format ocaml-extlib ocaml-runtime ocaml-xmlm ocaml-yojson
 %endif
-# ocaml autodep end for pkg: ocaml-gapi
+# ocaml autodep end for pkg: gapi-ocaml
 
 %description
 **gapi-ocaml** is a simple, unofficial, OCaml client for Google Services. The
@@ -83,8 +84,7 @@ Google Data Protocol APIs (GData):
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries/Other
-Requires:       %{name} = %{version}-
-Requires:       ocaml-gapi
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -92,7 +92,7 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -qn gapi-ocaml-%{version}
+%setup -q
 
 %build
 ocaml setup.ml -configure --enable-examples
@@ -115,7 +115,6 @@ ocaml setup.ml -install
 %exclude %{_libdir}/ocaml/gapi-ocaml/*.mli
 
 %files devel
-%defattr(-,root,root,-)
 %if %{opt}
 %{_libdir}/ocaml/gapi-ocaml/*.a
 %{_libdir}/ocaml/gapi-ocaml/*.cmx
@@ -126,6 +125,7 @@ ocaml setup.ml -install
 %changelog
 * Wed Mar 09 2016 Sérgio Basto <sergio@serjux.com> - 0.2.8-1
 - Update to 0.2.8
+- Migrate to Fedora.
 
 * Tue Nov 10 2015 ohering@suse.de
 - Add hardcoded Provides for pre 12.1 repos

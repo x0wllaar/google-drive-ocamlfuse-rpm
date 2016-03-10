@@ -1,6 +1,7 @@
 #
 # spec file for package google-drive-ocamlfuse
 #
+# Copyright (c) 2016 Sérgio Basto.
 # Copyright (c) 2015 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # Copyright (c) 2015 LISA GmbH, Bingen, Germany.
 #
@@ -30,7 +31,7 @@ Source:     https://github.com/astrada/google-drive-ocamlfuse/archive/v%{version
 BuildRequires:  ocaml >= 3.12.0
 BuildRequires:  ocaml-findlib-devel >= 1.2.7
 BuildRequires:  ocamlfuse >= 2.7.1
-BuildRequires:  ocaml-gapi-devel >= 0.2.6
+BuildRequires:  gapi-ocaml-devel >= 0.2.6
 BuildRequires:  ocaml-sqlite-devel >= 1.6.1
 BuildRequires:  ocaml-cryptokit-devel
 BuildRequires:  ocaml-extlib-devel
