@@ -19,32 +19,31 @@
 %define opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
 %define debug_package %{nil}
 
-Name:		google-drive-ocamlfuse
-Version:	0.5.18
-Release:	1.d_l_ocaml.1
-License:	BSD-2-Clause
-Summary:	FUSE filesystem for Google Drive
-Url:		http://gdfuse.forge.ocamlcore.org
-Group:		System/Filesystems
-#Source:		https://github.com/astrada/google-drive-ocamlfuse/archive/v0.5.18.tar.gz
-Source:		%{name}-%{version}.tar.gz
-BuildRequires:	ocaml >= 3.12.0
-BuildRequires:	ocaml-findlib-devel >= 1.2.7
-BuildRequires:	ocamlfuse >= 2.7.1
-BuildRequires:	ocaml-gapi-devel >= 0.2.6
-BuildRequires:	ocaml-sqlite-devel >= 1.6.1
-BuildRequires:	ocaml-cryptokit-devel
-BuildRequires:	ocaml-extlib-devel
-BuildRequires:	ocaml-camlidl-devel
-BuildRequires:	ocaml-yojson-devel
-BuildRequires:	ocaml-biniou-devel
-BuildRequires:	ocaml-easy-format-devel
-BuildRequires:	ocaml-curl-devel
-BuildRequires:	ocaml-ocamlnet-devel
-BuildRequires:	sqlite-devel
-BuildRequires:	curl-devel
-BuildRequires:	zlib-devel
-BuildRequires:	fuse-devel
+Name:       google-drive-ocamlfuse
+Version:    0.5.22
+Release:    1%{?dist}
+License:    BSD-2-Clause
+Summary:    FUSE filesystem for Google Drive
+Url:        http://gdfuse.forge.ocamlcore.org
+Group:      System/Filesystems
+Source:     https://github.com/astrada/google-drive-ocamlfuse/archive/v%{version}/%{name}-%{version}.tar.gz
+BuildRequires:  ocaml >= 3.12.0
+BuildRequires:  ocaml-findlib-devel >= 1.2.7
+BuildRequires:  ocamlfuse >= 2.7.1
+BuildRequires:  ocaml-gapi-devel >= 0.2.6
+BuildRequires:  ocaml-sqlite-devel >= 1.6.1
+BuildRequires:  ocaml-cryptokit-devel
+BuildRequires:  ocaml-extlib-devel
+BuildRequires:  ocaml-camlidl-devel
+BuildRequires:  ocaml-yojson-devel
+BuildRequires:  ocaml-biniou-devel
+BuildRequires:  ocaml-easy-format-devel
+BuildRequires:  ocaml-curl-devel
+BuildRequires:  ocaml-ocamlnet-devel
+BuildRequires:  sqlite-devel
+BuildRequires:  curl-devel
+BuildRequires:  zlib-devel
+BuildRequires:  fuse-devel
 
 %description
 google-drive-ocamlfuse is a FUSE-based file system backed by Google Drive,
@@ -79,6 +78,9 @@ cp gdfuse.native %{buildroot}%{_bindir}/%{name}
 
 
 %changelog
+* Thu Mar 10 2016 Sérgio Basto <sergio@serjux.com> - 0.5.22-1
+- Update to 0.5.22
+
 * Mon Sep 28 2015 hpj@urpla.net
 - update to version 0.5.18 (no changelog available)
 * Sun Mar 29 2015 hpj@urpla.net
