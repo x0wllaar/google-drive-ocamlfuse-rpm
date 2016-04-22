@@ -34,7 +34,7 @@ Packaging google-drive-ocamlfuse
     mockchain -r fedora-23-x86_64 -l resultsdir \
     ocamlfuse/ocamlfuse-2.7.1-1.cv2.fc23.src.rpm \
     gapi-ocaml/gapi-ocaml-0.2.10-1.fc23.src.rpm \
-    google-drive-ocamlfuse/google-drive-ocamlfuse-0.5.22-1.fc23.src.rpm
+    google-drive-ocamlfuse/google-drive-ocamlfuse-0.5.22-2.fc23.src.rpm
 ```
 
-and the rpm is in resultsdir/results/fedora-23-x86_64/google-drive-ocamlfuse-0.5.22-1.fc23/
+and the rpm is in resultsdir/results/fedora-23-x86_64/google-drive-ocamlfuse-0.5.22-2.fc23/

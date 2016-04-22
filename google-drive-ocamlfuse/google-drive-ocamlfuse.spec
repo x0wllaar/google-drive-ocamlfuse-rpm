@@ -22,7 +22,7 @@
 
 Name:       google-drive-ocamlfuse
 Version:    0.5.22
-Release:    1%{?dist}
+Release:    2%{?dist}
 License:    BSD-2-Clause
 Summary:    FUSE filesystem for Google Drive
 Url:        http://gdfuse.forge.ocamlcore.org
@@ -31,7 +31,7 @@ Source:     https://github.com/astrada/google-drive-ocamlfuse/archive/v%{version
 BuildRequires:  ocaml >= 3.12.0
 BuildRequires:  ocaml-findlib-devel >= 1.2.7
 BuildRequires:  ocamlfuse >= 2.7.1
-BuildRequires:  gapi-ocaml-devel >= 0.2.6
+BuildRequires:  gapi-ocaml-devel >= 0.2.10
 BuildRequires:  ocaml-sqlite-devel >= 1.6.1
 BuildRequires:  ocaml-cryptokit-devel
 BuildRequires:  ocaml-extlib-devel
@@ -79,6 +79,9 @@ cp gdfuse.native %{buildroot}%{_bindir}/%{name}
 
 
 %changelog
+* Fri Apr 22 2016 Sérgio Basto <sergio@serjux.com> - 0.5.22-2
+- Rebuild for gapi-ocaml-0.2.10
+
 * Thu Mar 10 2016 Sérgio Basto <sergio@serjux.com> - 0.5.22-1
 - Update to 0.5.22
 
