@@ -5,9 +5,11 @@ Packaging google-drive-ocamlfuse
 ```
    cd ocamlfuse
    spectool -g ocamlfuse.spec
-   rpmbuild -bs ocamlfuse.spec --define "_sourcedir ." --    define "_srcrpmdir ."
+   rpmbuild -bs ocamlfuse.spec --define "_sourcedir ." --define "_srcrpmdir ."
    # optional
    mock -r fedora-23-x86_64 --no-clean --rebuild ./ocamlfuse-2.7.1-1.cv2.fc23.src.rpm
+   or
+   copr-cli build sergiomb/google-drive-ocamlfuse ./ocamlfuse-2.7.1-2.cvs4.fc23.src.rpm
    cd ..
 ```
 
@@ -18,6 +20,8 @@ Packaging google-drive-ocamlfuse
     rpmbuild -bs gapi-ocaml.spec --define "_sourcedir ." --define "_srcrpmdir ."
     # optional
     mock -r fedora-23-x86_64 --no-clean --rebuild ./gapi-ocaml-0.2.10-1.fc23.src.rpm
+    or
+    copr-cli build sergiomb/google-drive-ocamlfuse ./gapi-ocaml-0.3.1-1.fc23.src.rpm
     cd ..
 ```
 

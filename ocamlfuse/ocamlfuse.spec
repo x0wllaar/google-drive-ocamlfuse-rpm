@@ -16,12 +16,13 @@
 
 Name:           ocamlfuse
 Version:        2.7.1
-Release:        1.cv2%{?dist}
+Release:        2.cvs4%{?dist}
+%global realversion %{version}_cvs4
 Summary:        Ocaml FUSE binding
 Group:          Development/Libraries/Other
 License:        GPLv2
 Url:            https://github.com/astrada/ocamlfuse/
-Source:         https://github.com/astrada/ocamlfuse/archive/v2.7.1_cvs2/%{name}-%{version}_cvs2.tar.gz
+Source:         https://github.com/astrada/ocamlfuse/archive/v%{realversion}/%{name}-%{realversion}.tar.gz
 BuildRequires:  fuse-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlidl
@@ -39,7 +40,7 @@ Bigarray library is used for read and writes, allowing the library to
 do zero-copy in ocaml land.
 
 %prep
-%setup -q -n %{name}-%{version}_cvs2
+%setup -q -n %{name}-%{realversion}
 
 %build
 cd lib
@@ -67,6 +68,9 @@ make OCAMLLIB=%{buildroot}/%{_libdir}/ocaml\
 %{_libdir}/ocaml/stublibs/*
 
 %changelog
+* Tue Dec 06 2016 Sérgio Basto <sergio@serjux.com> - 2.7.1-2.cvs4
+- Update to 2.7.1-cvs4
+
 * Thu Mar 10 2016 Sérgio Basto <sergio@serjux.com> - 2.7.1-1.cv2
 - Migrate to Fedora/Redhat.
 

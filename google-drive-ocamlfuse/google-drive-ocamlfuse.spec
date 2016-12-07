@@ -21,8 +21,8 @@
 %define debug_package %{nil}
 
 Name:       google-drive-ocamlfuse
-Version:    0.5.22
-Release:    2%{?dist}
+Version:    0.6.2
+Release:    1%{?dist}
 License:    BSD-2-Clause
 Summary:    FUSE filesystem for Google Drive
 Url:        http://gdfuse.forge.ocamlcore.org
@@ -79,6 +79,9 @@ cp gdfuse.native %{buildroot}%{_bindir}/%{name}
 
 
 %changelog
+* Tue Dec 06 2016 Sérgio Basto <sergio@serjux.com> - 0.6.2-1
+- Update to 0.6.2
+
 * Fri Apr 22 2016 Sérgio Basto <sergio@serjux.com> - 0.5.22-2
 - Rebuild for gapi-ocaml-0.2.10
 
