@@ -21,7 +21,7 @@
 %define debug_package %{nil}
 
 Name:       google-drive-ocamlfuse
-Version:    0.6.2
+Version:    0.6.17
 Release:    1%{?dist}
 License:    BSD-2-Clause
 Summary:    FUSE filesystem for Google Drive
@@ -41,10 +41,15 @@ BuildRequires:  ocaml-biniou-devel
 BuildRequires:  ocaml-easy-format-devel
 BuildRequires:  ocaml-curl-devel
 BuildRequires:  ocaml-ocamlnet-devel
+BuildRequires:  ocaml-ocamlnet-nethttpd-devel
 BuildRequires:  sqlite-devel
 BuildRequires:  curl-devel
 BuildRequires:  zlib-devel
 BuildRequires:  fuse-devel
+BuildRequires:  ocaml-zarith-devel
+%if 0%{?fedora} >= 26
+BuildRequires:  ocaml-ocamlbuild
+%endif
 
 %description
 google-drive-ocamlfuse is a FUSE-based file system backed by Google Drive,
@@ -79,6 +84,9 @@ cp gdfuse.native %{buildroot}%{_bindir}/%{name}
 
 
 %changelog
+* Tue Jul 11 2017 Sérgio Basto <sergio@serjux.com> - 0.6.17-1
+- Update to 0.6.17
+
 * Tue Dec 06 2016 Sérgio Basto <sergio@serjux.com> - 0.6.2-1
 - Update to 0.6.2
 
