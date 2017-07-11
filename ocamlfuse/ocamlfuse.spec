@@ -16,8 +16,9 @@
 
 Name:           ocamlfuse
 Version:        2.7.1
-Release:        2.cvs4%{?dist}
-%global realversion %{version}_cvs4
+%global tagversion cvs5
+%global realversion %{version}_%{tagversion}
+Release:        3.%{tagversion}%{?dist}
 Summary:        Ocaml FUSE binding
 Group:          Development/Libraries/Other
 License:        GPLv2
@@ -68,6 +69,9 @@ make OCAMLLIB=%{buildroot}/%{_libdir}/ocaml\
 %{_libdir}/ocaml/stublibs/*
 
 %changelog
+* Tue Jul 11 2017 Sérgio Basto <sergio@serjux.com> - 2.7.1-3.cvs5
+- Update to 2.7.1-cvs5
+
 * Tue Dec 06 2016 Sérgio Basto <sergio@serjux.com> - 2.7.1-2.cvs4
 - Update to 2.7.1-cvs4
 
