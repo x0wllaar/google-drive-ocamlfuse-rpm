@@ -18,7 +18,7 @@
 %define opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
 %define debug_package %{nil}
 Name:           gapi-ocaml
-Version:        0.3.1
+Version:        0.3.4
 Release:        1%{?dist}
 Summary:        A simple OCaml client for Google Services
 License:        MIT
@@ -38,6 +38,9 @@ BuildRequires:  ocaml-yojson >= 1.0.2
 BuildRequires:  ocaml-xmlm-devel >= 1.0.2
 BuildRequires:  ocaml-ounit-devel >= 1.1.0
 BuildRequires:  ocaml-curl-devel
+%if 0%{?fedora} >= 26
+BuildRequires:  ocaml-ocamlbuild
+%endif
 BuildRequires:  zlib-devel
 
 # ocaml autodep start for pkg: gapi-ocaml
@@ -123,6 +126,9 @@ ocaml setup.ml -install
 %{_libdir}/ocaml/gapi-ocaml/*.mli
 
 %changelog
+* Tue Jul 11 2017 Sérgio Basto <sergio@serjux.com> - 0.3.4-1
+- Update to 0.3.4
+
 * Tue Dec 06 2016 Sérgio Basto <sergio@serjux.com> - 0.3.1-1
 - Update to 0.3.1
 
