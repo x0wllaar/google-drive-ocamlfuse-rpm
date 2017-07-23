@@ -28,6 +28,7 @@ Packaging google-drive-ocamlfuse
 3 - Prepare google-drive-ocamlfuse
 ```
     cd google-drive-ocamlfuse/
+    rpmdev-bumpspec -n 0.6.20 -c "Update google-drive-ocamlfuse to 0.6.20" google-drive-ocamlfuse.spec
     spectool -g google-drive-ocamlfuse.spec
     rpmbuild -bs google-drive-ocamlfuse.spec --define "_sourcedir ." --define "_srcrpmdir ."
     cd ..

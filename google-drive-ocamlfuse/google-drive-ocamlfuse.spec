@@ -21,7 +21,7 @@
 %define debug_package %{nil}
 
 Name:       google-drive-ocamlfuse
-Version:    0.6.17
+Version:    0.6.20
 Release:    1%{?dist}
 License:    BSD-2-Clause
 Summary:    FUSE filesystem for Google Drive
@@ -41,7 +41,7 @@ BuildRequires:  ocaml-biniou-devel
 BuildRequires:  ocaml-easy-format-devel
 BuildRequires:  ocaml-curl-devel
 BuildRequires:  ocaml-ocamlnet-devel
-BuildRequires:  ocaml-ocamlnet-nethttpd-devel
+#BuildRequires:  ocaml-ocamlnet-nethttpd-devel
 BuildRequires:  sqlite-devel
 BuildRequires:  curl-devel
 BuildRequires:  zlib-devel
@@ -84,6 +84,9 @@ cp gdfuse.native %{buildroot}%{_bindir}/%{name}
 
 
 %changelog
+* Sat Jul 22 2017 Sérgio Basto <sergio@serjux.com> - 0.6.20-1
+- Update google-drive-ocamlfuse to 0.6.20
+
 * Tue Jul 11 2017 Sérgio Basto <sergio@serjux.com> - 0.6.17-1
 - Update to 0.6.17
 
