@@ -18,10 +18,10 @@
 #
 
 %define opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
-%define debug_package %{nil}
+#define debug_package %{nil}
 
 Name:       google-drive-ocamlfuse
-Version:    0.6.20
+Version:    0.6.21
 Release:    1%{?dist}
 License:    BSD-2-Clause
 Summary:    FUSE filesystem for Google Drive
@@ -84,6 +84,10 @@ cp gdfuse.native %{buildroot}%{_bindir}/%{name}
 
 
 %changelog
+* Sun Nov 05 2017 Sérgio Basto <sergio@serjux.com> - 0.6.21-1
+- Update google-drive-ocamlfuse to 0.6.21
+- Enable debuginfo
+
 * Sat Jul 22 2017 Sérgio Basto <sergio@serjux.com> - 0.6.20-1
 - Update google-drive-ocamlfuse to 0.6.20
 
