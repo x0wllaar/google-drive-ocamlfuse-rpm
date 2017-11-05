@@ -16,7 +16,7 @@
 
 
 %define opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
-%define debug_package %{nil}
+#define debug_package %{nil}
 Name:           gapi-ocaml
 Version:        0.3.4
 Release:        1%{?dist}
