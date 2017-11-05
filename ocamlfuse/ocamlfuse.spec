@@ -18,7 +18,7 @@ Name:           ocamlfuse
 Version:        2.7.1
 %global tagversion cvs5
 %global realversion %{version}_%{tagversion}
-Release:        3.%{tagversion}%{?dist}
+Release:        4.%{tagversion}%{?dist}
 Summary:        Ocaml FUSE binding
 Group:          Development/Libraries/Other
 License:        GPLv2
@@ -47,8 +47,8 @@ do zero-copy in ocaml land.
 cd lib
 #Disable warnings to avoid spurious message about 64 bit compatibility
 #due to a missing cast in a macro
-#using _smp_mflags here results in failed builds
-make CFLAGS="-w -D_FILE_OFFSET_BITS=64 -fPIC" all
+export CFLAGS="%{optflags} -w"
+%make_build all
 
 %install
 mkdir -p %{buildroot}/%{_libdir}/ocaml
@@ -56,12 +56,10 @@ mkdir -p %{buildroot}/%{_libdir}/ocaml/Fuse
 mkdir -p %{buildroot}/%{_libdir}/ocaml/caml
 mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 mkdir -p %{buildroot}/%{_bindir}
-
 cd lib
-make OCAMLLIB=%{buildroot}/%{_libdir}/ocaml\
+%make_install OCAMLLIB=%{buildroot}/%{_libdir}/ocaml\
      OCAMLFIND_INSTFLAGS="-destdir %{buildroot}/%{_libdir}/ocaml"\
-     BINDIR=%{buildroot}/%{_bindir} \
-     install
+     BINDIR=%{buildroot}/%{_bindir}
 
 %files
 %license LICENSE
@@ -69,6 +67,9 @@ make OCAMLLIB=%{buildroot}/%{_libdir}/ocaml\
 %{_libdir}/ocaml/stublibs/*
 
 %changelog
+* Thu Nov 02 2017 Sérgio Basto <sergio@serjux.com> - 2.7.1-4.cvs5
+- Fix CFLAGS to not generate debug packages empty.
+
 * Tue Jul 11 2017 Sérgio Basto <sergio@serjux.com> - 2.7.1-3.cvs5
 - Update to 2.7.1-cvs5
 
