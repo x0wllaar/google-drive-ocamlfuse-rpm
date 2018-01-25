@@ -15,10 +15,10 @@
 # published by the Open Source Initiative.
 
 
-%define opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
-#define debug_package %{nil}
+%global opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
+%global debug_package %{nil}
 Name:           gapi-ocaml
-Version:        0.3.4
+Version:        0.3.6
 Release:        1%{?dist}
 Summary:        A simple OCaml client for Google Services
 License:        MIT
@@ -38,9 +38,8 @@ BuildRequires:  ocaml-yojson >= 1.0.2
 BuildRequires:  ocaml-xmlm-devel >= 1.0.2
 BuildRequires:  ocaml-ounit-devel >= 1.1.0
 BuildRequires:  ocaml-curl-devel
-%if 0%{?fedora} >= 26
-BuildRequires:  ocaml-ocamlbuild
-%endif
+BuildRequires:  jbuilder
+BuildRequires:  opam-installer
 BuildRequires:  zlib-devel
 
 # ocaml autodep start for pkg: gapi-ocaml
@@ -98,13 +97,20 @@ developing applications that use %{name}.
 %setup -q
 
 %build
-ocaml setup.ml -configure --enable-examples
-ocaml setup.ml -build
+jbuilder build @install
+#ocaml setup.ml -configure --enable-examples
+#ocaml setup.ml -build
 
 %install
-export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
-mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
-ocaml setup.ml -install
+#export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
+#mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
+#ocaml setup.ml -install
+mkdir -p %{buildroot}%{_libdir}/ocaml
+#mkdir -p %{buildroot}%{_docdir}
+jbuilder install --prefix=%{buildroot} --libdir=%{buildroot}%{_libdir}/ocaml
+#only remove README.md and LICENSE
+rm -r %{buildroot}/doc/gapi-ocaml/
+
 
 %files
 %doc README.md
@@ -126,6 +132,9 @@ ocaml setup.ml -install
 %{_libdir}/ocaml/gapi-ocaml/*.mli
 
 %changelog
+* Wed Jan 24 2018 Sérgio Basto <sergio@serjux.com> - 0.3.6-1
+- Update gapi-ocaml to 0.3.6
+
 * Tue Jul 11 2017 Sérgio Basto <sergio@serjux.com> - 0.3.4-1
 - Update to 0.3.4
 
