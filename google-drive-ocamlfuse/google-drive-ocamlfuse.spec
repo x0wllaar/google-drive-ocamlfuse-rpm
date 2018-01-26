@@ -17,11 +17,11 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-%define opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
-#define debug_package %{nil}
+%global opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
+#global debug_package %{nil}
 
 Name:       google-drive-ocamlfuse
-Version:    0.6.21
+Version:    0.6.24
 Release:    1%{?dist}
 License:    BSD-2-Clause
 Summary:    FUSE filesystem for Google Drive
@@ -47,9 +47,8 @@ BuildRequires:  curl-devel
 BuildRequires:  zlib-devel
 BuildRequires:  fuse-devel
 BuildRequires:  ocaml-zarith-devel
-%if 0%{?fedora} >= 26
-BuildRequires:  ocaml-ocamlbuild
-%endif
+BuildRequires:  jbuilder
+BuildRequires:  opam-installer
 
 %description
 google-drive-ocamlfuse is a FUSE-based file system backed by Google Drive,
@@ -70,20 +69,29 @@ Further documentation is available here:
 %setup -q
 
 %build
-ocaml setup.ml -configure
-ocaml setup.ml -build
+#ocaml setup.ml -configure
+#ocaml setup.ml -build
+jbuilder build @install
 
 %install
-mkdir -p %{buildroot}%{_bindir}
-cp gdfuse.native %{buildroot}%{_bindir}/%{name}
+mkdir -p %{buildroot}/usr
+mkdir -p %{buildroot}%{_libdir}/ocaml
+jbuilder install --prefix=%{buildroot}/usr --libdir=%{buildroot}%{_libdir}/ocaml
+#cp gdfuse.native %{buildroot}%{_bindir}/%{name}
 
 %files
 %doc README.md doc/
 %license LICENSE
 %{_bindir}/%{name}
+%exclude %{_libdir}/ocaml/%{name}/META
+%exclude %{_libdir}/ocaml/%{name}/opam
+%exclude /usr/doc/%{name}
 
 
 %changelog
+* Thu Jan 25 2018 Sérgio Basto <sergio@serjux.com> - 0.6.24-1
+- Update google-drive-ocamlfuse to 0.6.24
+
 * Sun Nov 05 2017 Sérgio Basto <sergio@serjux.com> - 0.6.21-1
 - Update google-drive-ocamlfuse to 0.6.21
 - Enable debuginfo
