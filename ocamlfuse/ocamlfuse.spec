@@ -18,7 +18,7 @@ Name:           ocamlfuse
 Version:        2.7.1
 %global tagversion cvs5
 %global realversion %{version}_%{tagversion}
-Release:        4.%{tagversion}%{?dist}
+Release:        5.%{tagversion}%{?dist}
 Summary:        Ocaml FUSE binding
 Group:          Development/Libraries/Other
 License:        GPLv2
@@ -67,6 +67,9 @@ cd lib
 %{_libdir}/ocaml/stublibs/*
 
 %changelog
+* Thu Jan 25 2018 Sérgio Basto <sergio@serjux.com> - 2.7.1-5.cvs5
+- Refresh ocamlfuse
+
 * Thu Nov 02 2017 Sérgio Basto <sergio@serjux.com> - 2.7.1-4.cvs5
 - Fix CFLAGS to not generate debug packages empty.
 

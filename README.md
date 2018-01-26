@@ -16,6 +16,7 @@ Packaging google-drive-ocamlfuse
 2 - Prepare gapi-ocaml
 ```
     cd gapi-ocaml
+    rpmdev-bumpspec -n 0.3.6 -c "Update gapi-ocaml to 0.3.6" gapi-ocaml.spec
     spectool -g gapi-ocaml.spec
     rpmbuild -bs gapi-ocaml.spec --define "_sourcedir ." --define "_srcrpmdir ."
     # optional
