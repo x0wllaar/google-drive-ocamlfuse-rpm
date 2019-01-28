@@ -18,7 +18,7 @@ Name:           ocamlfuse
 Version:        2.7.1
 %global tagversion cvs5
 %global realversion %{version}_%{tagversion}
-Release:        5.%{tagversion}%{?dist}
+Release:        6.%{tagversion}%{?dist}
 Summary:        Ocaml FUSE binding
 Group:          Development/Libraries/Other
 License:        GPLv2
@@ -26,6 +26,7 @@ Url:            https://github.com/astrada/ocamlfuse/
 Source:         https://github.com/astrada/ocamlfuse/archive/v%{realversion}/%{name}-%{realversion}.tar.gz
 BuildRequires:  fuse-devel
 BuildRequires:  ocaml
+BuildRequires:  ocaml-runtime
 BuildRequires:  ocaml-camlidl
 BuildRequires:  ocaml-camlidl-devel
 BuildRequires:  ocaml-findlib
@@ -67,6 +68,9 @@ cd lib
 %{_libdir}/ocaml/stublibs/*
 
 %changelog
+* Mon Jan 28 2019 Sérgio Basto <sergio@serjux.com> - 2.7.1-6.cvs5
+- Add BR ocaml-runtime
+
 * Thu Jan 25 2018 Sérgio Basto <sergio@serjux.com> - 2.7.1-5.cvs5
 - Refresh ocamlfuse
 
