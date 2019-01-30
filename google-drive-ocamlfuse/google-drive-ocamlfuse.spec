@@ -18,10 +18,10 @@
 #
 
 %global opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
-#global debug_package %{nil}
+#global debug_package %%{nil}
 
 Name:       google-drive-ocamlfuse
-Version:    0.6.24
+Version:    0.7.1
 Release:    1%{?dist}
 License:    BSD-2-Clause
 Summary:    FUSE filesystem for Google Drive
@@ -89,6 +89,9 @@ jbuilder install --prefix=%{buildroot}/usr --libdir=%{buildroot}%{_libdir}/ocaml
 
 
 %changelog
+* Mon Jan 28 2019 Sérgio Basto <sergio@serjux.com> - 0.7.1-1
+- Update google-drive-ocamlfuse to 0.7.1
+
 * Thu Jan 25 2018 Sérgio Basto <sergio@serjux.com> - 0.6.24-1
 - Update google-drive-ocamlfuse to 0.6.24
 
