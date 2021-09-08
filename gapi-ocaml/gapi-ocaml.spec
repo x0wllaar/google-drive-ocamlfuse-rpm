@@ -16,13 +16,14 @@
 
 
 %global opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
+#for Fedora 33
 %global debug_package %{nil}
+
 Name:           gapi-ocaml
-Version:        0.3.9
+Version:        0.3.19
 Release:        1%{?dist}
 Summary:        A simple OCaml client for Google Services
 License:        MIT
-Group:          Development/Libraries/Other
 
 Url:            https://github.com/astrada/gapi-ocaml
 Source0:        https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -38,8 +39,8 @@ BuildRequires:  ocaml-yojson >= 1.0.2
 BuildRequires:  ocaml-xmlm-devel >= 1.0.2
 BuildRequires:  ocaml-ounit-devel >= 1.1.0
 BuildRequires:  ocaml-curl-devel
-BuildRequires:  jbuilder
-BuildRequires:  opam-installer
+BuildRequires:  ocaml-zarith
+BuildRequires:  ocaml-dune-devel
 BuildRequires:  zlib-devel
 
 # ocaml autodep start for pkg: gapi-ocaml
@@ -97,19 +98,13 @@ developing applications that use %{name}.
 %setup -q
 
 %build
-jbuilder build @install
-#ocaml setup.ml -configure --enable-examples
-#ocaml setup.ml -build
+dune build @install
 
 %install
-#export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
-#mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
-#ocaml setup.ml -install
-mkdir -p %{buildroot}%{_libdir}/ocaml
-#mkdir -p %{buildroot}%{_docdir}
-jbuilder install --prefix=%{buildroot} --libdir=%{buildroot}%{_libdir}/ocaml
+dune install --prefix=%{buildroot}/usr --libdir=%{buildroot}%{_libdir}/ocaml
+
 #only remove README.md and LICENSE
-rm -r %{buildroot}/doc/gapi-ocaml/
+rm -r %{buildroot}/usr/doc/%{name}
 
 
 %files
@@ -132,6 +127,12 @@ rm -r %{buildroot}/doc/gapi-ocaml/
 %{_libdir}/ocaml/gapi-ocaml/*.mli
 
 %changelog
+* Wed Sep 08 2021 Sérgio Basto <sergio@serjux.com> - 0.3.19-1
+- Update gapi-ocaml to 0.3.19
+
+* Tue Nov 19 2019 Sérgio Basto <sergio@serjux.com> - 0.3.16-1
+- Update gapi-ocaml to 0.3.16
+
 * Mon Jan 28 2019 Sérgio Basto <sergio@serjux.com> - 0.3.9-1
 - Update gapi-ocaml to 0.3.9
 
