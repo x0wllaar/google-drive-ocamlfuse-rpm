@@ -16,11 +16,10 @@
 
 Name:           ocamlfuse
 Version:        2.7.1
-%global tagversion cvs5
+%global tagversion cvs7
 %global realversion %{version}_%{tagversion}
-Release:        6.%{tagversion}%{?dist}
+Release:        8.%{tagversion}%{?dist}
 Summary:        Ocaml FUSE binding
-Group:          Development/Libraries/Other
 License:        GPLv2
 Url:            https://github.com/astrada/ocamlfuse/
 Source:         https://github.com/astrada/ocamlfuse/archive/v%{realversion}/%{name}-%{realversion}.tar.gz
@@ -31,7 +30,7 @@ BuildRequires:  ocaml-camlidl
 BuildRequires:  ocaml-camlidl-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
-BuildRequires:  perl
+BuildRequires:  ocaml-dune-devel
 
 %description
 This is a binding to fuse for the ocaml programming language, enabling
@@ -42,32 +41,34 @@ Bigarray library is used for read and writes, allowing the library to
 do zero-copy in ocaml land.
 
 %prep
-%setup -q -n %{name}-%{realversion}
+%autosetup -p1 -n %{name}-%{realversion}
 
 %build
-cd lib
 #Disable warnings to avoid spurious message about 64 bit compatibility
 #due to a missing cast in a macro
-export CFLAGS="%{optflags} -w"
-%make_build all
+#export CFLAGS="%{optflags} -w"
+dune build @install
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
-mkdir -p %{buildroot}/%{_libdir}/ocaml/Fuse
-mkdir -p %{buildroot}/%{_libdir}/ocaml/caml
-mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
-mkdir -p %{buildroot}/%{_bindir}
-cd lib
-%make_install OCAMLLIB=%{buildroot}/%{_libdir}/ocaml\
-     OCAMLFIND_INSTFLAGS="-destdir %{buildroot}/%{_libdir}/ocaml"\
-     BINDIR=%{buildroot}/%{_bindir}
+dune install --prefix=%{buildroot}/usr \
+    --libdir=%{buildroot}%{_libdir}/ocaml
+
+#only remove README.md and LICENSE
+rm -r %{buildroot}/usr/doc/%{name}
 
 %files
+%doc README.md
 %license LICENSE
-%{_libdir}/ocaml/Fuse/
+%{_libdir}/ocaml/ocamlfuse/
 %{_libdir}/ocaml/stublibs/*
 
 %changelog
+* Wed Sep 08 2021 Sérgio Basto <sergio@serjux.com> - 2.7.1-8.cvs7
+- Update ocamlfuse to 2.7.1-cvs7
+
+* Sun Nov 17 2019 Sérgio Basto <sergio@serjux.com> - 2.7.1-7.cvs6
+- Update ocamlfuse to 2.7.1-cvs6
+
 * Mon Jan 28 2019 Sérgio Basto <sergio@serjux.com> - 2.7.1-6.cvs5
 - Add BR ocaml-runtime
 
