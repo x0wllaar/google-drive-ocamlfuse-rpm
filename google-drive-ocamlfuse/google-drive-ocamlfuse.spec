@@ -17,16 +17,12 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-%global opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
-#global debug_package %%{nil}
-
 Name:       google-drive-ocamlfuse
-Version:    0.7.1
+Version:    0.7.26
 Release:    1%{?dist}
 License:    BSD-2-Clause
 Summary:    FUSE filesystem for Google Drive
 Url:        http://gdfuse.forge.ocamlcore.org
-Group:      System/Filesystems
 Source:     https://github.com/astrada/google-drive-ocamlfuse/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml >= 3.12.0
 BuildRequires:  ocaml-findlib-devel >= 1.2.7
@@ -41,14 +37,14 @@ BuildRequires:  ocaml-biniou-devel
 BuildRequires:  ocaml-easy-format-devel
 BuildRequires:  ocaml-curl-devel
 BuildRequires:  ocaml-ocamlnet-devel
+BuildRequires:  ocaml-zarith-devel
 #BuildRequires:  ocaml-ocamlnet-nethttpd-devel
 BuildRequires:  sqlite-devel
 BuildRequires:  curl-devel
 BuildRequires:  zlib-devel
 BuildRequires:  fuse-devel
-BuildRequires:  ocaml-zarith-devel
-BuildRequires:  jbuilder
-BuildRequires:  opam-installer
+BuildRequires:  ocaml-dune
+
 
 %description
 google-drive-ocamlfuse is a FUSE-based file system backed by Google Drive,
@@ -69,26 +65,29 @@ Further documentation is available here:
 %setup -q
 
 %build
-#ocaml setup.ml -configure
-#ocaml setup.ml -build
-jbuilder build @install
+dune build @install
 
 %install
-mkdir -p %{buildroot}/usr
-mkdir -p %{buildroot}%{_libdir}/ocaml
-jbuilder install --prefix=%{buildroot}/usr --libdir=%{buildroot}%{_libdir}/ocaml
+dune install --prefix=%{buildroot}/usr --libdir=%{buildroot}%{_libdir}/ocaml
 #cp gdfuse.native %{buildroot}%{_bindir}/%{name}
+
+#only remove README.md and LICENSE
+rm -r %{buildroot}/usr/doc/%{name}
 
 %files
 %doc README.md doc/
 %license LICENSE
 %{_bindir}/%{name}
-%exclude %{_libdir}/ocaml/%{name}/META
-%exclude %{_libdir}/ocaml/%{name}/opam
-%exclude /usr/doc/%{name}
+%{_libdir}/ocaml/%{name}
 
 
 %changelog
+* Wed Sep 08 2021 Sérgio Basto <sergio@serjux.com> - 0.7.26-1
+- Update google-drive-ocamlfuse to 0.7.26
+
+* Tue Nov 19 2019 Sérgio Basto <sergio@serjux.com> - 0.7.14-1
+- Update google-drive-ocamlfuse to 0.7.14
+
 * Mon Jan 28 2019 Sérgio Basto <sergio@serjux.com> - 0.7.1-1
 - Update google-drive-ocamlfuse to 0.7.1
 
