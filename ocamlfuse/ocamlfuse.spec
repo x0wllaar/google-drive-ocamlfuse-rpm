@@ -15,14 +15,12 @@
 # published by the Open Source Initiative.
 
 Name:           ocamlfuse
-Version:        2.7.1
-%global tagversion cvs7
-%global realversion %{version}_%{tagversion}
-Release:        8.%{tagversion}%{?dist}
+Version:        2.7.1_cvs7
+Release:        1%{?dist}
 Summary:        Ocaml FUSE binding
 License:        GPLv2
 Url:            https://github.com/astrada/ocamlfuse/
-Source:         https://github.com/astrada/ocamlfuse/archive/v%{realversion}/%{name}-%{realversion}.tar.gz
+Source:         https://github.com/astrada/ocamlfuse/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  fuse-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-runtime
@@ -41,7 +39,7 @@ Bigarray library is used for read and writes, allowing the library to
 do zero-copy in ocaml land.
 
 %prep
-%autosetup -p1 -n %{name}-%{realversion}
+%autosetup -p1
 
 %build
 #Disable warnings to avoid spurious message about 64 bit compatibility
@@ -63,6 +61,9 @@ rm -r %{buildroot}/usr/doc/%{name}
 %{_libdir}/ocaml/stublibs/*
 
 %changelog
+* Thu Sep 09 2021 Sérgio Basto <sergio@serjux.com> - 2.7.1_cvs7-1
+- New package versioning for ocamlfuse-2.7.1_cvs7
+
 * Wed Sep 08 2021 Sérgio Basto <sergio@serjux.com> - 2.7.1-8.cvs7
 - Update ocamlfuse to 2.7.1-cvs7
 
