@@ -1,0 +1,82 @@
+diff --git a/lib/Fuse_util.c b/lib/Fuse_util.c
+index 02d2429..1c1d1eb 100644
+--- a/lib/Fuse_util.c
++++ b/lib/Fuse_util.c
+@@ -347,9 +347,9 @@ static struct fuse_operations ops = {
+   FOR_ALL_OPS(SET_NULL_OP)
+ };
+ 
+-static value * ocaml_list_length=NULL;
++static const value * ocaml_list_length=NULL;
+ 
+-#define DECLARE_OP_CLOSURE(OPNAME) static value * OPNAME##_closure=NULL;
++#define DECLARE_OP_CLOSURE(OPNAME) static const value * OPNAME##_closure=NULL;
+ FOR_ALL_OPS(DECLARE_OP_CLOSURE)
+ 
+ #define init_ARGS (struct fuse_conn_info *conn)
+@@ -531,7 +531,7 @@ FOR_ALL_OPS(DECLARE_OP_CLOSURE)
+ #define setxattr_CB \
+     vpath = copy_string(path); \
+     vstring = alloc_string(size); \
+-    memcpy(String_val(vstring),val,size); \
++    memcpy(&Byte(String_val(vstring),0),val,size); \
+     vres=callback4(*setxattr_closure,vpath,copy_string(name),vstring,c2ml_setxattr_flags(flags));
+ #define setxattr_RES
+ 
+@@ -598,18 +598,18 @@ static OPNAME##_RTYPE gm281_ops_##OPNAME OPNAME##_ARGS \
+ {\
+   CAMLparam0(); \
+   CAMLlocal4(vstring, vpath, vres, vtmp); \
+-  int res=-1; \
++  OPNAME##_RTYPE res=(typeof (res))-1L; \
+   OPNAME##_CB \
+   if (Tag_val(vres)==1) /* Result is not Bad */ \
+      { \
+-       res=0; \
++       res=(typeof (res))0L; \
+        OPNAME##_RES /* res can be changed here */ \
+      } \
+   else \
+   { \
+     if (Is_block(Field(vres,0)))  /* This is EUNKNOWNERR of int in ocaml */ \
+-	res=-Int_val(Field(Field(vres,0),0));				\
+-    else res=-ml2c_unix_error(Int_val(Field(vres,0))); \
++	res=(typeof (res))(long)-Int_val(Field(Field(vres,0),0));				\
++    else res=(typeof (res))(long)-ml2c_unix_error(Int_val(Field(vres,0))); \
+   } \
+   CAMLreturnT(OPNAME##_RTYPE, res); \
+ }\
+@@ -642,7 +642,7 @@ struct fuse_operations * get_fuse_operations()
+   return &ops;
+ }
+ 
+-value * ocaml_fuse_loop_closure;
++const value * ocaml_fuse_loop_closure;
+ 
+ int mainloop(struct fuse * f,int multithreaded)
+ {
+diff --git a/lib/Unix_util_stubs.c b/lib/Unix_util_stubs.c
+index 2aa851a..5c01587 100644
+--- a/lib/Unix_util_stubs.c
++++ b/lib/Unix_util_stubs.c
+@@ -24,6 +24,7 @@
+   vincenzo_ml@yahoo.it
+ */
+ 
++#include <unistd.h>
+ #include <stddef.h>
+ #include <string.h>
+ #include <errno.h>
+diff --git a/ocamlfuse.opam b/ocamlfuse.opam
+index c2a91bf..2d92bab 100644
+--- a/ocamlfuse.opam
++++ b/ocamlfuse.opam
+@@ -14,7 +14,7 @@ depends: [
+   "base-threads"
+   "base-unix"
+   "camlidl"
+-  "dune"
++  "dune" {>= "1.6"}
+   "dune-configurator"
+ ]
+ depexts: [
