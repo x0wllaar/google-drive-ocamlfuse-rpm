@@ -1,6 +1,6 @@
 fuse_ver=2.7.1_cvs7
-gapi_ver=0.3.19
-googledrive_ver=0.7.26
+gapi_ver=0.4.2
+googledrive_ver=0.7.27
 fver=33
 
 if [ -z "$1" ]

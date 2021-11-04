@@ -20,7 +20,7 @@
 %global debug_package %{nil}
 
 Name:           gapi-ocaml
-Version:        0.3.19
+Version:        0.4.2
 Release:        1%{?dist}
 Summary:        A simple OCaml client for Google Services
 License:        MIT
@@ -127,6 +127,9 @@ rm -r %{buildroot}/usr/doc/%{name}
 %{_libdir}/ocaml/gapi-ocaml/*.mli
 
 %changelog
+* Wed Nov 03 2021 Sérgio Basto <sergio@serjux.com> - 0.4.2-1
+- Update gapi-ocaml to 0.4.2
+
 * Wed Sep 08 2021 Sérgio Basto <sergio@serjux.com> - 0.3.19-1
 - Update gapi-ocaml to 0.3.19
 

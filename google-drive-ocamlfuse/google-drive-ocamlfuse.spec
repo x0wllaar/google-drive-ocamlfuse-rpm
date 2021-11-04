@@ -18,7 +18,7 @@
 #
 
 Name:       google-drive-ocamlfuse
-Version:    0.7.26
+Version:    0.7.27
 Release:    1%{?dist}
 License:    BSD-2-Clause
 Summary:    FUSE filesystem for Google Drive
@@ -82,6 +82,9 @@ rm -r %{buildroot}/usr/doc/%{name}
 
 
 %changelog
+* Wed Nov 03 2021 Sérgio Basto <sergio@serjux.com> - 0.7.27-1
+- Update google-drive-ocamlfuse to 0.7.27
+
 * Wed Sep 08 2021 Sérgio Basto <sergio@serjux.com> - 0.7.26-1
 - Update google-drive-ocamlfuse to 0.7.26
 
