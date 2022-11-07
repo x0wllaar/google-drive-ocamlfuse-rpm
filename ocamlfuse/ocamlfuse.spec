@@ -52,6 +52,7 @@ dune build @install
 %install
 dune install --prefix=%{buildroot}/usr \
     --libdir=%{buildroot}%{_libdir}/ocaml
+find %{buildroot} -type f | xargs sed -i "s|%{buildroot}||g" #Fix buildroot leaking
 
 #only remove README.md and LICENSE
 rm -r %{buildroot}/usr/doc/%{name}
