@@ -56,12 +56,14 @@ find %{buildroot} -type f | xargs sed -i "s|%{buildroot}||g" #Fix buildroot leak
 
 #only remove README.md and LICENSE
 rm -r %{buildroot}/usr/doc/%{name}
+rm -r %{buildroot}/usr/doc/conf-libfuse
 
 %files
 %doc README.md
 %license LICENSE
 %{_libdir}/ocaml/ocamlfuse/
 %{_libdir}/ocaml/stublibs/*
+%{_libdir}/ocaml/conf-libfuse/*
 
 %changelog
 * Mon Nov 07 2022 Grigorii Khvatskii <gkhvatsk@nd.edu> - 2.7.1_cvs7-2
