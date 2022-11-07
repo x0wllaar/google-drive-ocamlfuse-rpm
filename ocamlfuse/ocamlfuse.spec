@@ -16,7 +16,7 @@
 
 Name:           ocamlfuse
 Version:        2.7.1_cvs7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Ocaml FUSE binding
 License:        GPLv2
 Url:            https://github.com/astrada/ocamlfuse/
