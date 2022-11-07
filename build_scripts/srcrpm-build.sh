@@ -2,6 +2,10 @@
 set -exou pipefail
 
 pushd ./src_rpms
+dnf builddep -y tiny-httpd-ocaml-*.src.rpm
+rpmbuild --rebuild tiny-httpd-ocaml-*.src.rpm
+dnf install -y /root/rpmbuild/RPMS/$(arch)/*.rpm
+
 dnf builddep -y gapi-ocaml-*.src.rpm
 rpmbuild --rebuild gapi-ocaml-*.src.rpm
 dnf install -y /root/rpmbuild/RPMS/$(arch)/*.rpm
