@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -exuo pipefail
+
+OCAML_FUSE_VER="2.7.1_cvs7"
+GAPI_OCAML_VER="0.4.2"
+GOOGLE_DRIVE_OCAMLFUSE_VER="0.7.27"
+
+export OCAML_FUSE_VER
+export GAPI_OCAML_VER
+export GOOGLE_DRIVE_OCAMLFUSE_VER
+export TARGET_FEDORA_VER
