@@ -27,6 +27,7 @@ License:        MIT
 
 Url:            https://github.com/astrada/gapi-ocaml
 Source0:        https://github.com/astrada/gapi-ocaml/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch1:         git_master_diff.patch
 
 BuildRequires:  ocaml >= 3.12
 BuildRequires:  ocaml-biniou
@@ -129,6 +130,9 @@ rm -r %{buildroot}/usr/doc/%{name}
 %{_libdir}/ocaml/gapi-ocaml/*.mli
 
 %changelog
+* Mon Nov 07 2022 Grigorii Khvatskii <gkhvatsk@nd.edu> - 0.4.2-2
+- Add 10 commits from git master
+
 * Wed Nov 03 2021 Sérgio Basto <sergio@serjux.com> - 0.4.2-1
 - Update gapi-ocaml to 0.4.2
 
