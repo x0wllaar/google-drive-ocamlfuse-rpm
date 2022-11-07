@@ -70,6 +70,7 @@ dune build @install
 %install
 dune install --prefix=%{buildroot}/usr --libdir=%{buildroot}%{_libdir}/ocaml
 #cp gdfuse.native %{buildroot}%{_bindir}/%{name}
+find %{buildroot} -type f | xargs sed -i "s|%{buildroot}||g" #Fix buildroot leaking
 
 #only remove README.md and LICENSE
 rm -r %{buildroot}/usr/doc/%{name}
