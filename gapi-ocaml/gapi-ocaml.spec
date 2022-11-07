@@ -21,7 +21,7 @@
 
 Name:           gapi-ocaml
 Version:        0.4.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A simple OCaml client for Google Services
 License:        MIT
 
