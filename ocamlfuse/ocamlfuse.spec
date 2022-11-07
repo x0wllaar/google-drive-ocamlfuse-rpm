@@ -21,7 +21,7 @@ Summary:        Ocaml FUSE binding
 License:        GPLv2
 Url:            https://github.com/astrada/ocamlfuse/
 Source:         https://github.com/astrada/ocamlfuse/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch1:         v2.7.1_cvs7...08f90ac.diff
+Patch1:         git_master_diff.patch
 
 BuildRequires:  fuse-devel
 BuildRequires:  ocaml
@@ -64,6 +64,9 @@ rm -r %{buildroot}/usr/doc/%{name}
 %{_libdir}/ocaml/stublibs/*
 
 %changelog
+* Mon Nov 07 2022 Grigorii Khvatskii <gkhvatsk@nd.edu> - 2.7.1_cvs7-2
+- Add the last 10 (+6 new) patches from git master
+
 * Thu Sep 09 2021 Sérgio Basto <sergio@serjux.com> - 2.7.1_cvs7-1
 - New package versioning for ocamlfuse-2.7.1_cvs7
 - Add the last 4 patches from git master
