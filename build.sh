@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -exuo pipefail
 
+IMAGE_NAME="rpm-builder"
+
 rm -rf ./rpms
 mkdir ./rpms
 
-podman build -f ./Dockerfile
-IMAGE_NAME="$(podman build -q -f ./Dockerfile)"
+podman build -f ./Dockerfile -t "$IMAGE_NAME"
 
-podman run -it --rm --mount type=bind,source="$(pwd)"/rpms,target=/rpms "$IMAGE_NAME" ./build_scripts/build_all.sh || true
-podman image rm "$IMAGE_NAME"
+podman run -it --rm -v "$(pwd)"/rpms:/rpms:rw -v "$(pwd)":/buildfiles:ro "$IMAGE_NAME" || true

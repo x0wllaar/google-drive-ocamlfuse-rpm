@@ -11,9 +11,7 @@ RUN dnf install -y dnf-plugins-core
 RUN dnf update -y
 RUN dnf install -y rpmdevtools
 
-#Install build dependencies
+WORKDIR /buildentry
+COPY start_build.sh .
 
-
-#Copy source files to container
-WORKDIR /build/gdfs
-COPY . .
+ENTRYPOINT /buildentry/start_build.sh
